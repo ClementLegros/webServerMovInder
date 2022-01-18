@@ -5,8 +5,13 @@ const app = express();
 const port = process.env.PORT || 8000;
 
 app.get('/', (req, res) => {
-    res.set('Content-Type', 'text/html');
-    res.send('Dylan et calvin sont trop beau');
+    const json = require('./sample.json');
+    res.json(json);
+});
+
+app.get('/personnage', (req, res) => {
+    const json = require('./sample2.json');
+    res.json(json);
 });
 
 app.listen(port, () => {
