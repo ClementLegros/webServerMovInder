@@ -79,3 +79,35 @@ VALUES
     'homme',
     'hétéro'
   )
+
+  INSERT into
+  utilisateur(
+    nom_utilisateur,
+    e_mail,
+    num_utilisateur,
+    mdp_utilisateur,
+    sexe,
+    orientation
+  )
+VALUES
+  (
+    'Robloblo',
+    'robloblo-mail@mail.fr',
+    '0650789962',
+    '123456',
+    'homme',
+    'hétéro'
+  )
+
+  INSERT into
+  utilisateur
+VALUES
+  (
+    DEFAULT,
+    'Robloblo',
+    'robloblo-mail@mail.fr',
+    '0650789962',
+    '123456',
+    'homme',
+    'hétéro'
+  )
