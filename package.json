@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/ClementLegros/webServerMovInder#readme",
   "dependencies": {
-    "express": "^4.17.2"
+    "express": "^4.17.2",
+    "pg": "^8.7.1"
   }
 }
