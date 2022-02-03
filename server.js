@@ -96,6 +96,36 @@ app.post("/registerMovie", (req, res) => {
     );
 });
 
+app.post("/registerLike", (req, res) => {
+    process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
+
+    const { idUser, idFilm, aime } = req.body;
+    pool.query(
+        "INSERT into aime VALUES(DEFAULT, $1,$2,$3)", [idUser, idFilm, aime],
+        (error, results) => {
+            if (error) {
+                console.error(error);
+            }
+            res.status(201).send(`User added with ID: ${res.insertId}`)
+        }
+    );
+});
+
+app.post("/registerGenreMovie", (req, res) => {
+    process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
+    
+    const { idFilm, idGenre } = req.body;
+    pool.query(
+        "INSERT into possede VALUES(DEFAULT,$1,$2)", [idFilm, idGenre],
+        (error, results) => {
+            if (error) {
+                console.error(error);
+            }
+            res.status(201).send(`User added with ID: ${res.insertId}`);
+        }
+    );
+});
+
 
 // #endregion
 
