@@ -109,9 +109,9 @@ app.post("/registerMovie", (req, res) => {
 app.post("/registerLike", (req, res) => {
     process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
 
-    const { idUser, idFilm, aime } = req.body;
+    const { idUser, idFilm, avis } = req.body;
     pool.query(
-        "INSERT into aime VALUES(DEFAULT, $1,$2,$3)", [idUser, idFilm, aime],
+        "INSERT into aime VALUES($1,$2,$3)", [idUser, idFilm, avis],
         (error, results) => {
             if (error) {
                 console.error(error);
