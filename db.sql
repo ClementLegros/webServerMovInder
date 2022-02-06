@@ -111,3 +111,15 @@ VALUES
     'homme',
     'hétéro'
   )
+
+  select
+  *
+from
+  aime,
+  films,
+  possede,
+  genre
+where
+  aime.id_film = films.id_film
+  AND films.id_film = possede.id_film
+  AND possede.id_genre = genre.id_genre

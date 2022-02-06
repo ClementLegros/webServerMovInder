@@ -44,6 +44,16 @@ app.get("/user", function (req, res) {
     });
 });
 
+app.get("/films", function (req, res) {
+    process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
+    pool.query("select * from films", (error, results) => {
+        if (error) {
+            return console.error(error);
+        }
+        res.status(200).json(results.rows);
+    });
+})
+
 app.get("/login/:username/:password", function (req, res) {
     process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
     const username = req.params.username;

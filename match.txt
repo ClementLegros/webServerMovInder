@@ -1,0 +1,1 @@
+INSERT INTO films VALUES(DEFAULT , 'Spiderman', 'Cest un mec, cest spiderman', 'Sam Raimi', 'https://fr.web.img5.acsta.net/medias/nmedia/00/00/00/33/spiderman.jpg', 20)
