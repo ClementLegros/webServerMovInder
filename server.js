@@ -104,6 +104,24 @@ app.get("/conversation/:idUser/:idConversation", function (req, res) {
 
 })
 
+app.get("/message/conversation/:idConversation", function (req, res) {
+    process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
+    const idConversation = req.params.idConversation;
+    pool.query(
+        "select * from contient, message where contient.id_message = message.id_message and contient.id_conversation = $1",
+        [idConversation],
+        (error, results) => {
+            if (error) {
+                return console.error(error);
+            }
+            res.status(200).json(results.rows)
+        }
+    );
+
+})
+
+
+
 // #endregion
 
 // #region post
