@@ -71,6 +71,22 @@ app.get("/login/:username/:password", function (req, res) {
     );
 });
 
+app.get("/conversation/:idUser", function (req, res) {
+    process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
+    const idUser = req.params.idUser;
+    pool.query(
+        "select distinct * from conversation, est_dans where conversation.id_conversation = est_dans.id_conversation and est_dans.id_utilisateur = $1",
+        [idUser],
+        (error, results) => {
+            if (error) {
+                return console.error(error);
+            }
+            res.status(200).json(results.rows)
+        }
+    );
+
+})
+
 // #endregion
 
 // #region post
