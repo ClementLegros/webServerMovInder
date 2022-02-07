@@ -120,7 +120,21 @@ app.get("/message/conversation/:idConversation", function (req, res) {
 
 })
 
+app.get("/match/:idUser", function (req, res) {
+    process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
+    const idUser = req.params.idUser;
+    pool.query(
+        "SELECT utilisateur.nom_utilisateur, genre.genre FROM films, utilisateur, aime, genre, possede WHERE films.id_film = aime.id_film AND utilisateur.id_utilisateur = aime.id_utilisateur AND genre.id_genre = possede.id_genre AND films.id_film = possede.id_film AND utilisateur.id_utilisateur != $1 GROUP BY(utilisateur.nom_utilisateur, genre.id_genre) HAVING COUNT(possede.id_genre) > 3;",
+        [idUser],
+        (error, results) => {
+            if (error) {
+                return console.error(error);
+            }
+            res.status(200).json(results.rows)
+        }
+    );
 
+})
 
 // #endregion
 
