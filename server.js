@@ -87,6 +87,23 @@ app.get("/conversation/:idUser", function (req, res) {
 
 })
 
+app.get("/conversation/:idUser/:idConversation", function (req, res) {
+    process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;
+    const idUser = req.params.idUser;
+    const idConversation = req.params.idConversation;
+    pool.query(
+        "select utilisateur.id_utilisateur, utilisateur.nom_utilisateur, utilisateur.e_mail, utilisateur.mdp_utilisateur, utilisateur.sexe, utilisateur.orientation from conversation, est_dans, utilisateur where conversation.id_conversation = est_dans.id_conversation and est_dans.id_utilisateur = utilisateur.id_utilisateur and conversation.id_conversation = $1 and utilisateur.id_utilisateur != $2",
+        [idUser, idConversation],
+        (error, results) => {
+            if (error) {
+                return console.error(error);
+            }
+            res.status(200).json(results.rows)
+        }
+    );
+
+})
+
 // #endregion
 
 // #region post
